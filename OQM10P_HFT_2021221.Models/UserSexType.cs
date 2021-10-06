@@ -1,7 +1,7 @@
 ﻿namespace OQM10P_HFT_2021221.Models
 {
-    enum IssuePriorityType
+    enum UserSexType
     {
-        SMALL, MEDIUM, HIGH
+        MALE, FEMALE
     }
 }

@@ -1,0 +1,7 @@
+﻿namespace OQM10P_HFT_2021221.Models
+{
+    enum UserPositionType
+    {
+        JUNIOR_DEV, MEDIOR_DEV, SENIOR_DEV, ARCHITECT, PRODUCT_OWNER, PROJECT_MANAGER, BUSINESS_ANALYST, TESTER
+    }
+}
