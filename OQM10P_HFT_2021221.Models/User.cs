@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace OQM10P_HFT_2021221.Models
 {
     [Table("USERS")]
-    class User
+    public class User
     {
 
         //column names
@@ -32,7 +32,8 @@ namespace OQM10P_HFT_2021221.Models
 
         [Column(EMAIL)]
         [MaxLength(255)]
-        [Required] 
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Column(POSITION)]

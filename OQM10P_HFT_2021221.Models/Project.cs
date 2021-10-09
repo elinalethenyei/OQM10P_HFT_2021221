@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace OQM10P_HFT_2021221.Models
 {
     [Table("PROJECTS")]
-    class Project
+    public class Project
     {
         //column names
         private const string ID = "ID";
@@ -59,11 +59,13 @@ namespace OQM10P_HFT_2021221.Models
         [Column(MODIFIED_AT)]
         [Required] 
         public DateTime ModifiedAt { get; set; }
+        
         [Column(CLOSED_AT)]
         public DateTime ClosedAt { get; set; }
 
-        public HashSet<User> Users { get; set; }
+        [NotMapped]
+        public virtual ICollection<User> Users { get; set; }
 
-        public User Owner { get; set; }
+        public virtual User Owner { get; set; }
     }
 }

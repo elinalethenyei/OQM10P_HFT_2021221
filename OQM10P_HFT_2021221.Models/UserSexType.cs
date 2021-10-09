@@ -1,6 +1,6 @@
 ﻿namespace OQM10P_HFT_2021221.Models
 {
-    enum UserSexType
+    public enum UserSexType
     {
         MALE, FEMALE
     }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace OQM10P_HFT_2021221.Models
 {
     [Table("ISSUES")]
-    class Issue
+    public class Issue
     {
         //column names
         private const string ID = "ID";
