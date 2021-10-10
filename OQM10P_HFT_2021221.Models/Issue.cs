@@ -22,6 +22,7 @@ namespace OQM10P_HFT_2021221.Models
         private const string CREATED_AT = "CREATED_AT";
         private const string MODIFIED_AT = "MODIFIED_AT";
         private const string CLOSED_AT = "CLOSED_AT";
+
         public Issue()
         {
             CreatedAt = new DateTime();
@@ -35,7 +36,7 @@ namespace OQM10P_HFT_2021221.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column(ID)]
-        public long Id { get; set; }
+        public int Id { get; set; }
         
         [Column(TITLE)]
         [MaxLength(255)]
@@ -87,15 +88,18 @@ namespace OQM10P_HFT_2021221.Models
 
         [Column(PROJECT_ID)]
         [Required]
-        public long ProjectId { get; set; }
+        [ForeignKey(nameof(Project))]
+        public int ProjectId { get; set; }
 
         [Column(USER_ID)]
         [Required]
-        public long UserId { get; set; }
+        public int UserId { get; set; }
 
-        public Project Project { get; set; }
+        [NotMapped]
+        public virtual Project Project { get; set; }
        
-        public User User { get; set; }
+        [NotMapped]
+        public virtual User User { get; set; }
 
     }
 }

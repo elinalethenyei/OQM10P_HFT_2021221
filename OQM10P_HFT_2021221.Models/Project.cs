@@ -20,7 +20,14 @@ namespace OQM10P_HFT_2021221.Models
         private const string MODIFIED_AT = "MODIFIED_AT";
         private const string CLOSED_AT = "CLOSED_AT";
 
-        public Project(string name, long ownerId)
+        public Project()
+        {
+            CreatedAt = new DateTime();
+            ModifiedAt = CreatedAt;
+            IsOpened = false;
+        }
+
+        public Project(string name, int ownerId)
         {
             CreatedAt = new DateTime();
             ModifiedAt = CreatedAt;
@@ -32,7 +39,7 @@ namespace OQM10P_HFT_2021221.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column(ID)]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [Column(NAME)]
         [MaxLength(255)]
@@ -52,7 +59,7 @@ namespace OQM10P_HFT_2021221.Models
 
         [Column(OWNER_ID)]
         [Required] 
-        public long OwnerId { get; set; }
+        public int OwnerId { get; set; }
 
         [Column(CREATED_AT)]
         [Required] 
@@ -67,8 +74,10 @@ namespace OQM10P_HFT_2021221.Models
         [NotMapped]
         public virtual ICollection<User> Users { get; set; }
 
+        [NotMapped]
         public virtual User Owner { get; set; }
 
-        public IQueryable<Issue> Issues { get; set; }
+        [NotMapped] 
+        public virtual ICollection<Issue> Issues { get; set; }
     }
 }
