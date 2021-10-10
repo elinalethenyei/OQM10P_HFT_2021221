@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:6001",
+      "applicationUrl": "http://localhost:33124",
       "sslPort": 0
     }
   },
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "OQM10P_HFT_2021221.Endpoints": {
+    "Endpoint": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

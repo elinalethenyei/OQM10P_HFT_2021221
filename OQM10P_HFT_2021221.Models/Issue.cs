@@ -22,7 +22,7 @@ namespace OQM10P_HFT_2021221.Models
         private const string CREATED_AT = "CREATED_AT";
         private const string MODIFIED_AT = "MODIFIED_AT";
         private const string CLOSED_AT = "CLOSED_AT";
-        public Issue(DateTime createdAt)
+        public Issue()
         {
             CreatedAt = new DateTime();
             ModifiedAt = CreatedAt;

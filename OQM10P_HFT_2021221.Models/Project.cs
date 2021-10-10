@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace OQM10P_HFT_2021221.Models
 {
@@ -67,5 +68,7 @@ namespace OQM10P_HFT_2021221.Models
         public virtual ICollection<User> Users { get; set; }
 
         public virtual User Owner { get; set; }
+
+        public IQueryable<Issue> Issues { get; set; }
     }
 }
