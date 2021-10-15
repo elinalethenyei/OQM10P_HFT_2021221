@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="userJson" xml:space="preserve">
+    <value>[{\"Id\":1,\"Name\":\"Renelle Bedham\",\"Email\":\"rbedham0@g.co\",\"Sex\":\"1\",\"Username\":\"rbedham0\",\"Position\":\"1\"}, {\"Id\":2,\"Name\":\"Sheena Rapps\",\"Email\":\"srapps1@webmd.com\",\"Sex\":\"1\",\"Username\":\"srapps1\",\"Position\":\"1\"}, {\"Id\":3,\"Name\":\"Charlton Lebourn\",\"Email\":\"clebourn2@washingtonpost.com\",\"Sex\":\"1\",\"Username\":\"clebourn2\",\"Position\":\"2\"}, {\"Id\":4,\"Name\":\"Susette Ridel\",\"Email\":\"sridel3@ibm.com\",\"Sex\":\"1\",\"Username\":\"sridel3\",\"Position\":\"1\"}, {\"Id\":5,\"Name\":\"Ryon Winsley\",\"Email\":\"rwinsley4@privacy.gov.au\",\"Sex\":\"1\",\"Username\":\"rwinsley4\",\"Position\":\"2\"}, {\"Id\":6,\"Name\":\"Axel Olech\",\"Email\":\"aolech5@qq.com\",\"Sex\":\"1\",\"Username\":\"aolech5\",\"Position\":\"3\"}, {\"Id\":7,\"Name\":\"Marie-jeanne Clery\",\"Email\":\"mclery6@drupal.org\",\"Sex\":\"1\",\"Username\":\"mclery6\",\"Position\":\"1\"}, {\"Id\":8,\"Name\":\"Shellie Fonso\",\"Email\":\"sfonso7@cam.ac.uk\",\"Sex\":\"1\",\"Username\":\"sfonso7\",\"Position\":\"1\"}, {\"Id\":9,\"Name\":\"Brandtr Oldfield\",\"Email\":\"boldfield8@miitbeian.gov.cn\",\"Sex\":\"1\",\"Username\":\"boldfield8\",\"Position\":\"2\"}, {\"Id\":10,\"Name\":\"Alie Esson\",\"Email\":\"aesson9@list-manage.com\",\"Sex\":\"1\",\"Username\":\"aesson9\",\"Position\":\"3\"}, {\"Id\":11,\"Name\":\"Suzanna Boas\",\"Email\":\"sboasa@wikispaces.com\",\"Sex\":\"1\",\"Username\":\"sboasa\",\"Position\":\"1\"}, {\"Id\":12,\"Name\":\"Emmet McCowan\",\"Email\":\"emccowanb@google.co.uk\",\"Sex\":\"1\",\"Username\":\"emccowanb\",\"Position\":\"2\"}, {\"Id\":13,\"Name\":\"Clement Tather\",\"Email\":\"ctatherc@ucoz.com\",\"Sex\":\"1\",\"Username\":\"ctatherc\",\"Position\":\"3\"}, {\"Id\":14,\"Name\":\"Lina Gruszczak\",\"Email\":\"lgruszczakd@nymag.com\",\"Sex\":\"1\",\"Username\":\"lgruszczakd\",\"Position\":\"2\"}, {\"Id\":15,\"Name\":\"Beatrix Snaith\",\"Email\":\"bsnaithe@ocn.ne.jp\",\"Sex\":\"1\",\"Username\":\"bsnaithe\",\"Position\":\"3\"}, {\"Id\":16,\"Name\":\"Zachariah Franciskiewicz\",\"Email\":\"zfranciskiewiczf@photobucket.com\",\"Sex\":\"1\",\"Username\":\"zfranciskiewiczf\",\"Position\":\"2\"}, {\"Id\":17,\"Name\":\"Hewe Herley\",\"Email\":\"hherleyg@nymag.com\",\"Sex\":\"1\",\"Username\":\"hherleyg\",\"Position\":\"3\"}, {\"Id\":18,\"Name\":\"Abram Pinniger\",\"Email\":\"apinnigerh@businessinsider.com\",\"Sex\":\"1\",\"Username\":\"apinnigerh\",\"Position\":\"3\"}, {\"Id\":19,\"Name\":\"Wylma McGarvey\",\"Email\":\"wmcgarveyi@so-net.ne.jp\",\"Sex\":\"1\",\"Username\":\"wmcgarveyi\",\"Position\":\"2\"}, {\"Id\":20,\"Name\":\"Irvine Vowels\",\"Email\":\"ivowelsj@loc.gov\",\"Sex\":\"1\",\"Username\":\"ivowelsj\",\"Position\":\"3\"}]</value>
+  </data>
+</root>

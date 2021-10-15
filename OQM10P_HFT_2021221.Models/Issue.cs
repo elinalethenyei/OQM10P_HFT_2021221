@@ -45,10 +45,10 @@ namespace OQM10P_HFT_2021221.Models
         
         [Column(DESCRIPTION)]
         [MaxLength(5000)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
         
         [Column(ESTIMATED_TIME)]
-        public int EstimatedTime { get; set; }
+        public int? EstimatedTime { get; set; }
         
         [Column(TIME_SPENT)]
         [Required]
@@ -67,7 +67,7 @@ namespace OQM10P_HFT_2021221.Models
         public IssueStatus Status { get; set; }
         
         [Column(DUE_DATE)]
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; }
         
         [Column(TYPE)]
         [EnumDataType(typeof(IssueType))]
@@ -84,22 +84,25 @@ namespace OQM10P_HFT_2021221.Models
         public DateTime ModifiedAt { get; set; }
         
         [Column(CLOSED_AT)]
-        public DateTime ClosedAt { get; set; }
+        public DateTime? ClosedAt { get; set; }
 
         [Column(PROJECT_ID)]
         [Required]
-        [ForeignKey(nameof(Project))]
         public int ProjectId { get; set; }
 
         [Column(USER_ID)]
-        [Required]
-        public int UserId { get; set; }
+        [ForeignKey(nameof(User))]
+        public int? UserId { get; set; }
 
         [NotMapped]
         public virtual Project Project { get; set; }
-       
-        [NotMapped]
+
+        //[NotMapped]
         public virtual User User { get; set; }
 
+        public override string ToString()
+        {
+            return $"Id: {Id}, Title: {Title}, Project: {Project.Name}, Type: {Type}, Status: {Status}, TimeSpent: {TimeSpent}, User: {User?.Name}";
+        }
     }
 }

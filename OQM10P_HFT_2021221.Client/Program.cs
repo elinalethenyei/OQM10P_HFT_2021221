@@ -12,22 +12,24 @@ namespace OQM10P_HFT_2021221.Client
             var projectService = DependencyFactory.GetProjectService();
             var issueService = DependencyFactory.GetIssueService();
 
+            Console.WriteLine("User list:");
             foreach (var user in userService.ReadAll())
             {
-                Console.WriteLine("User list:");
-                Console.WriteLine($"Id: {user.Id}, {user.Name}");
+                //Console.WriteLine($"Id: {user.Id}, {user.Name}");
+                Console.WriteLine(user.ToString());
             }
 
+            Console.WriteLine("\r\nProject list:");
             foreach (var project in projectService.ReadAll())
             {
-                Console.WriteLine("\r\nProject list:");
-                Console.WriteLine($"Id: {project.Id}, {project.Name}");
+                //Console.WriteLine($"Id: {project.Id}, {project.Name}");
+                Console.WriteLine(project.ToString());
             }
 
+            Console.WriteLine("\r\nIssue list:");
             foreach (var issue in issueService.ReadAll())
             {
-                Console.WriteLine("\r\nIssue list:");
-                Console.WriteLine($"Id: {issue.Id}, {issue.Title}");
+                Console.WriteLine(issue.ToString());
             }
         }
     }

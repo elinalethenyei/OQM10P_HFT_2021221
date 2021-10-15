@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +15,6 @@ namespace OQM10P_HFT_2021221.Models
         private const string NAME = "NAME";
         private const string GOAL_DESCRIPTION = "GOAL_DESCRIPTION";
         private const string ESTIMATED_TIME = "ESTIMATED_TIME";
-        private const string IS_OPENED = "IS_OPENED";
         private const string OWNER_ID = "OWNER_ID";
         private const string CREATED_AT = "CREATED_AT";
         private const string MODIFIED_AT = "MODIFIED_AT";
@@ -24,7 +24,6 @@ namespace OQM10P_HFT_2021221.Models
         {
             CreatedAt = new DateTime();
             ModifiedAt = CreatedAt;
-            IsOpened = false;
         }
 
         public Project(string name, int ownerId)
@@ -33,7 +32,6 @@ namespace OQM10P_HFT_2021221.Models
             ModifiedAt = CreatedAt;
             Name = name;
             OwnerId = ownerId;
-            IsOpened = false;
         }
 
         [Key]
@@ -48,17 +46,14 @@ namespace OQM10P_HFT_2021221.Models
 
         [Column(GOAL_DESCRIPTION)]
         [MaxLength(5000)]
-        public string GoalDescription { get; set; }
+        public string? GoalDescription { get; set; }
 
         [Column(ESTIMATED_TIME)]
-        public int EstimatedTime { get; set; }
-
-        [Column(IS_OPENED)]
-        [Required] 
-        public bool IsOpened { get; set; }
+        public int? EstimatedTime { get; set; }
 
         [Column(OWNER_ID)]
-        [Required] 
+        [Required]
+        [ForeignKey(nameof(Owner))] 
         public int OwnerId { get; set; }
 
         [Column(CREATED_AT)]
@@ -69,15 +64,20 @@ namespace OQM10P_HFT_2021221.Models
         public DateTime ModifiedAt { get; set; }
         
         [Column(CLOSED_AT)]
-        public DateTime ClosedAt { get; set; }
+        public DateTime? ClosedAt { get; set; }
 
-        [NotMapped]
-        public virtual ICollection<User> Users { get; set; }
+        //[NotMapped]
+        //public virtual ICollection<User> Users { get; set; }
 
-        [NotMapped]
+        //[NotMapped]
         public virtual User Owner { get; set; }
 
         [NotMapped] 
         public virtual ICollection<Issue> Issues { get; set; }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, Name: {Name}, EstimatedTime: {EstimatedTime}, IsOpened: {ClosedAt == null}, Owner: {Owner.Name}";
+        }
     }
 }

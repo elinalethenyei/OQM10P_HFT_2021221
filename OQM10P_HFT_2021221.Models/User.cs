@@ -47,5 +47,11 @@ namespace OQM10P_HFT_2021221.Models
         [MaxLength(6)]
         [Required] 
         public UserSexType Sex { get; set; }
+
+        public override string ToString()
+        {
+            //return $"Id: {Id}, Name: {Name}, Username: {Username}, Email: {Email}, Position: {Position}, Sex: {Sex}";
+            return $"Id: {Id}, Name: {Name}, Position: {Position}, Sex: {Sex}";
+        }
     }
 }
