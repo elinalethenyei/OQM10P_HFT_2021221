@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace OQM10P_HFT_2021221.Repository.Repositories
 {
-    public abstract class RepoBase<TEntity, TKey> : IRepoBase<TEntity, TKey> where TEntity : class
+    public abstract class RepositoryBase<TEntity, TKey> : IRepoBase<TEntity, TKey> where TEntity : class
     {
 
         protected IssueManagementDbContext Context;
 
-        protected RepoBase(IssueManagementDbContext context)
+        protected RepositoryBase(IssueManagementDbContext context)
         {
             Context = context;
         }
@@ -29,7 +29,9 @@ namespace OQM10P_HFT_2021221.Repository.Repositories
             Context.Remove(Read(key));
         }
 
-        public abstract TEntity Read(TKey key);
+        public TEntity Read(TKey key) {
+            return Context.Find<TEntity>(key);
+        }
 
         public IQueryable<TEntity> ReadAll()
         {

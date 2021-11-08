@@ -18,5 +18,6 @@ namespace OQM10P_HFT_2021221.Logic.Interfaces
         Project Update(Project entity);
 
         void Delete(int id);
+        Dictionary<string, double> GetSpentPerEstimatedTimeRatePerProject();
     }
 }

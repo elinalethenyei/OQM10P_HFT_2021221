@@ -37,22 +37,13 @@ namespace OQM10P_HFT_2021221.Repository
             //seed
             //mockaroo-val generált az adathalmaz json-ök deserializálása, mentése
             User[] userList = JsonConvert.DeserializeObject<User[]>(_userJson);
-            foreach (User user in userList)
-            {
-                modelBuilder.Entity<User>().HasData(user);
-            }
+            modelBuilder.Entity<User>().HasData(userList);
 
-            Project[] projectList = JsonConvert.DeserializeObject<Project[]>(_projectJson, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }); ;
-            foreach (Project project in projectList)
-            {
-                modelBuilder.Entity<Project>().HasData(project);
-            }
+            Project[] projectList = JsonConvert.DeserializeObject<Project[]>(_projectJson, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            modelBuilder.Entity<Project>().HasData(projectList);
 
             Issue[] issueList = JsonConvert.DeserializeObject<Issue[]>(_issueJson, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }); ;
-            foreach (Issue issue in issueList)
-            {
-                modelBuilder.Entity<Issue>().HasData(issue);
-            }
+            modelBuilder.Entity<Issue>().HasData(issueList);
 
 
         }

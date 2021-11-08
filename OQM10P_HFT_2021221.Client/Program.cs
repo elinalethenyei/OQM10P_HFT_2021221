@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OQM10P_HFT_2021221.Models;
+using System;
 
 namespace OQM10P_HFT_2021221.Client
 {
@@ -15,14 +16,12 @@ namespace OQM10P_HFT_2021221.Client
             Console.WriteLine("User list:");
             foreach (var user in userService.ReadAll())
             {
-                //Console.WriteLine($"Id: {user.Id}, {user.Name}");
                 Console.WriteLine(user.ToString());
             }
 
             Console.WriteLine("\r\nProject list:");
             foreach (var project in projectService.ReadAll())
             {
-                //Console.WriteLine($"Id: {project.Id}, {project.Name}");
                 Console.WriteLine(project.ToString());
             }
 
@@ -31,6 +30,24 @@ namespace OQM10P_HFT_2021221.Client
             {
                 Console.WriteLine(issue.ToString());
             }
+
+            Console.WriteLine("\r\nOne project:");
+            Console.WriteLine(projectService.Read(3).ToString());
+
+            Console.WriteLine("\r\nEstimated per actually spent time per project report");
+            foreach (var reportRow in projectService.GetSpentPerEstimatedTimeRatePerProject())
+            {
+                Console.WriteLine($"Project name: {reportRow.Key}, \t\t Spent/Estimated ratio: {reportRow.Value}");
+            }
+
+            userService.Create(new User
+            {
+                Name = "asd",
+                //Username= "asd",
+                Email ="asd",
+                Sex = UserSexType.FEMALE,
+                Position = UserPositionType.MEDIOR_DEV
+            });
         }
     }
 }

@@ -38,13 +38,11 @@ namespace OQM10P_HFT_2021221.Models
 
         [Column(POSITION)]
         [EnumDataType(typeof(UserPositionType))]
-        [MaxLength(20)]
         [Required] 
         public UserPositionType Position { get; set; }
 
         [Column(SEX)]
         [EnumDataType(typeof(UserSexType))]
-        [MaxLength(6)]
         [Required] 
         public UserSexType Sex { get; set; }
 

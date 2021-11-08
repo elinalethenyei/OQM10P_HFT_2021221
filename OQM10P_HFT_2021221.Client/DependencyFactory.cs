@@ -3,6 +3,8 @@ using OQM10P_HFT_2021221.Logic.Services;
 using OQM10P_HFT_2021221.Repository;
 using OQM10P_HFT_2021221.Repository.Interfaces;
 using OQM10P_HFT_2021221.Repository.Repositories;
+using OQM10P_HFT_2021221.Validation.Interfaces;
+using OQM10P_HFT_2021221.Validation.Validators;
 
 namespace OQM10P_HFT_2021221.Client
 {
@@ -12,6 +14,7 @@ namespace OQM10P_HFT_2021221.Client
         static IIssueRepo _issueRepo;
         static IUserRepo _userRepo;
         static IProjectRepo _projectRepo;
+        static ModelValidator _validator;
 
 
         public static IProjectService GetProjectService()
@@ -23,10 +26,15 @@ namespace OQM10P_HFT_2021221.Client
 
             if (_projectRepo == null)
             {
-                _projectRepo = new ProjectRepo(_dbContext);
+                _projectRepo = new ProjectRepository(_dbContext);
             }
 
-            return new ProjectService(_projectRepo);
+            if (_issueRepo == null)
+            {
+                _issueRepo = new IssueRepository(_dbContext);
+            }
+
+            return new ProjectService(_projectRepo, _issueRepo);
         }
 
         public static IIssueService GetIssueService()
@@ -38,7 +46,7 @@ namespace OQM10P_HFT_2021221.Client
 
             if (_issueRepo == null)
             {
-                _issueRepo = new IssueRepo(_dbContext);
+                _issueRepo = new IssueRepository(_dbContext);
             }
 
             return new IssueService(_issueRepo);
@@ -53,10 +61,15 @@ namespace OQM10P_HFT_2021221.Client
 
             if (_userRepo == null)
             {
-                _userRepo = new UserRepo(_dbContext);
+                _userRepo = new UserRepository(_dbContext);
             }
 
-            return new UserService(_userRepo);
+            if(_validator == null)
+            {
+                _validator = new ModelValidator(_userRepo);
+            }
+
+            return new UserService(_userRepo, _validator);
         }
 
 
