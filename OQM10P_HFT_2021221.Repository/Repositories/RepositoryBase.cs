@@ -1,9 +1,5 @@
 ﻿using OQM10P_HFT_2021221.Repository.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OQM10P_HFT_2021221.Repository.Repositories
 {
@@ -29,9 +25,11 @@ namespace OQM10P_HFT_2021221.Repository.Repositories
             Context.Remove(Read(key));
         }
 
-        public TEntity Read(TKey key) {
-            return Context.Find<TEntity>(key);
-        }
+        //public TEntity Read(TKey key) {
+        //    return Context.Find<TEntity>(key);
+        //}
+
+        public abstract TEntity Read(TKey key);
 
         public IQueryable<TEntity> ReadAll()
         {

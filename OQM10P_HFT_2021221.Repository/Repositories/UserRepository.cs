@@ -1,6 +1,7 @@
 ﻿using OQM10P_HFT_2021221.Models;
 using OQM10P_HFT_2021221.Repository.Interfaces;
 using System;
+using System.Linq;
 
 namespace OQM10P_HFT_2021221.Repository.Repositories
 {
@@ -11,9 +12,9 @@ namespace OQM10P_HFT_2021221.Repository.Repositories
             Context = context;
         }
 
-        //public override User Read(int key)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public override User Read(int id)
+        {
+            return ReadAll().SingleOrDefault(x => x.Id == id);
+        }
     }
 }
