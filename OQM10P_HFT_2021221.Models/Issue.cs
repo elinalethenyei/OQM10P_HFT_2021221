@@ -91,13 +91,13 @@ namespace OQM10P_HFT_2021221.Models
         public int ProjectId { get; set; }
 
         [Column(USER_ID)]
-        [ForeignKey(nameof(User))]
+        //[ForeignKey(nameof(User))]
         public int? UserId { get; set; }
 
         [NotMapped]
         public virtual Project Project { get; set; }
 
-        //[NotMapped]
+        [NotMapped]
         public virtual User User { get; set; }
 
         public override string ToString()

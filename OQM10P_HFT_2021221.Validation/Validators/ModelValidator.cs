@@ -1,14 +1,8 @@
 ﻿using OQM10P_HFT_2021221.Models;
 using OQM10P_HFT_2021221.Repository.Interfaces;
 using OQM10P_HFT_2021221.Validation.Exceptions;
-using OQM10P_HFT_2021221.Validation.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OQM10P_HFT_2021221.Validation.Validators
 {
@@ -16,10 +10,14 @@ namespace OQM10P_HFT_2021221.Validation.Validators
     {
 
         private IUserRepo _userRepo;
+        private IIssueRepo _issueRepo;
+        private IProjectRepo _projectRepo;
 
-        public ModelValidator(IUserRepo userRepo)
+        public ModelValidator(IUserRepo userRepo, IIssueRepo issueRepo, IProjectRepo projectRepo)
         {
             _userRepo = userRepo;
+            _issueRepo = issueRepo;
+            _projectRepo = projectRepo;
         }
 
         public bool Validate(object instance)
@@ -28,6 +26,14 @@ namespace OQM10P_HFT_2021221.Validation.Validators
             if (instance is User user)
             {
                 errors = new UserValidator(_userRepo).Validate(user);
+            }
+            else if (instance is Issue issue)
+            {
+                errors = new IssueValidator(_issueRepo).Validate(issue);
+            }
+            else if (instance is Project project)
+            {
+                errors = new ProjectValidator(_projectRepo).Validate(project);
             }
 
             if (errors.Count > 0)

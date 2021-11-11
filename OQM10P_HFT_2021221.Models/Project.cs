@@ -66,10 +66,6 @@ namespace OQM10P_HFT_2021221.Models
         [Column(CLOSED_AT)]
         public DateTime? ClosedAt { get; set; }
 
-        //[NotMapped]
-        //public virtual ICollection<User> Users { get; set; }
-
-        //[NotMapped]
         public virtual User Owner { get; set; }
 
         [NotMapped] 

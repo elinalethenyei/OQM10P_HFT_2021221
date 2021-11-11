@@ -22,14 +22,23 @@ namespace OQM10P_HFT_2021221.Validation.Validators
             var vc = new ValidationContext(user);
             Validator.TryValidateObject(user, vc, errors, validateAllProperties: true);
 
-            if (_userRepo.ReadAll().Count(x => x.Email.Equals(user.Email)) > 0)
+            if (user.Id > 0)
             {
-                errors.Add(new ValidationResult("Email address is already exists!"));
+                User savedUser = _userRepo.Read(user.Id);
+                if (savedUser == null)
+                {
+                    errors.Add(new ValidationResult($"User with the given id does not exists! Id: {user.Id}"));
+                }
+            }
+
+            if (_userRepo.ReadAll().Count(x => x.Email.Equals(user.Email) && x.Id != user.Id) > 0)
+            {
+                errors.Add(new ValidationResult($"Email address already exists! Email: {user.Email}"));
             }
 
             if (_userRepo.ReadAll().Count(x => x.Username.Equals(user.Username)) > 0)
             {
-                errors.Add(new ValidationResult("Username is already exists!"));
+                errors.Add(new ValidationResult($"Username already exists! Username: {user.Username}"));
             }
 
             return errors;
