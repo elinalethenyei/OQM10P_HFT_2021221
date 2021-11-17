@@ -1,6 +1,9 @@
 ﻿using OQM10P_HFT_2021221.Logic.Interfaces;
 using OQM10P_HFT_2021221.Models;
 using OQM10P_HFT_2021221.Repository.Interfaces;
+using OQM10P_HFT_2021221.Validation.Exceptions;
+using OQM10P_HFT_2021221.Validation.Validators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,18 +13,27 @@ namespace OQM10P_HFT_2021221.Logic.Services
     {
         private IProjectRepo _projectRepo;
         private IIssueRepo _issueRepo;
+        private ModelValidator _validator;
 
-        public ProjectService(IProjectRepo projectRepo, IIssueRepo issueRepo)
+        public ProjectService(IProjectRepo projectRepo, IIssueRepo issueRepo, ModelValidator validator)
         {
             _projectRepo = projectRepo;
             _issueRepo = issueRepo;
+            _validator = validator;
         }
 
         public Project Create(Project entity)
         {
-            //check owner csak senior lehet
-            return _projectRepo.Create(entity);
-            //csak akkor lehet create-en kívül másik státuszt állítani, ha egyből van tulajdonosa a tasknak
+            try
+            {
+                _validator.Validate(entity);
+                return _projectRepo.Create(entity);
+            }
+            catch (CustomValidationException e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
 
         public void Delete(int id)
@@ -41,11 +53,33 @@ namespace OQM10P_HFT_2021221.Logic.Services
 
         public Project Update(Project entity)
         {
-            //check owner csak senior lehet
-            return _projectRepo.Update(entity);
-            //modifiedAt kitöltés
-            //ha eddig nem done volt a státusz, de most az, akkor closedAt kitöltése
-            //csak akkor lehet státuszt váltani, ha van tulajdonosa a tasknak
+            try
+            {
+                _validator.Validate(entity);
+                Project savedProject = _projectRepo.Read(entity.Id);
+                savedProject.OwnerId = entity.OwnerId;
+                savedProject.Name = entity.Name;
+                savedProject.EstimatedTime = entity.EstimatedTime;
+                savedProject.GoalDescription = entity.GoalDescription;
+                entity.ModifiedAt = new DateTime();
+                return _projectRepo.Update(savedProject);
+            }
+            catch (CustomValidationException e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public Project closeProject(int id)
+        {
+            Project savedProject = _projectRepo.Read(id);
+            if(savedProject != null)
+            {
+                savedProject.ClosedAt = new DateTime();
+                return _projectRepo.Update(savedProject);
+            }
+            return null;
         }
 
         /// <summary>

@@ -7,13 +7,15 @@ using System.Linq;
 
 namespace OQM10P_HFT_2021221.Validation.Validators
 {
-    class ProjectValidator : IValidator<Project>
+    public class ProjectValidator : IValidator<Project>
     {
         private IProjectRepo _projectRepo;
+        private IUserRepo _userRepo;
 
-        public ProjectValidator(IProjectRepo projectRepo)
+        public ProjectValidator(IProjectRepo projectRepo, IUserRepo userRepo)
         {
             _projectRepo = projectRepo;
+            _userRepo = userRepo;
         }
 
         public List<ValidationResult> Validate(Project project)
@@ -30,9 +32,13 @@ namespace OQM10P_HFT_2021221.Validation.Validators
                     errors.Add(new ValidationResult($"Project with the given id does not exists! Id: {project.Id}"));
                 }
             }
-            if (_projectRepo.ReadAll().Count(x => x.Name.Equals(project.Name) && x.Id != project.Id) > 0)
+            if (_projectRepo.ReadAll().Where(x => x.Name.Equals(project.Name) && !x.Id.Equals(project.Id)).Count() > 0)
             {
                 errors.Add(new ValidationResult($"Project name already exists! Email: {project.Name}"));
+            }
+            if(_userRepo.Read(project.OwnerId) == null)
+            {
+                errors.Add(new ValidationResult($"User does not exist with the given project owner id! Owner id: {project.OwnerId}"));
             }
 
             return errors;

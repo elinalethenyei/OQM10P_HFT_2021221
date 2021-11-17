@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OQM10P_HFT_2021221.Validation.Validators
 {
-    class UserValidator : IValidator<User>
+    public class UserValidator : IValidator<User>
     {
         private IUserRepo _userRepo;
 
@@ -31,7 +31,10 @@ namespace OQM10P_HFT_2021221.Validation.Validators
                 }
             }
 
-            if (_userRepo.ReadAll().Count(x => x.Email.Equals(user.Email) && x.Id != user.Id) > 0)
+            var all = _userRepo.ReadAll();
+            var email = _userRepo.ReadAll().Where(x => x.Email.Equals(user.Email));
+            var emailandid = _userRepo.ReadAll().Where(x => x.Email.Equals(user.Email) && !x.Id.Equals(user.Id));
+            if (_userRepo.ReadAll().Where(x => x.Email.Equals(user.Email) && !x.Id.Equals(user.Id)).Count() > 0)
             {
                 errors.Add(new ValidationResult($"Email address already exists! Email: {user.Email}"));
             }

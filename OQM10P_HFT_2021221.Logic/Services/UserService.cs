@@ -71,9 +71,21 @@ namespace OQM10P_HFT_2021221.Logic.Services
 
         public User Update(User entity)
         {
-            //username nem módosítható
-            //unique email check
-            return _userRepo.Update(entity);
+            try
+            {
+                _validator.Validate(entity);
+                User savedUser = _userRepo.Read(entity.Id);
+                savedUser.Name = entity.Name;
+                savedUser.Position = entity.Position;
+                savedUser.Sex = entity.Sex;
+                savedUser.Email = entity.Email;
+                return _userRepo.Update(savedUser);
+            }
+            catch (CustomValidationException e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
 
         /// <summary>

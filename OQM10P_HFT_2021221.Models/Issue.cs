@@ -56,13 +56,11 @@ namespace OQM10P_HFT_2021221.Models
         
         [Column(PRIORITY)]
         [EnumDataType(typeof(IssuePriorityType))]
-        [MaxLength(20)]
         [Required]
         public IssuePriorityType Priority { get; set; }
         
         [Column(STATUS)]
         [EnumDataType(typeof(IssueStatus))]
-        [MaxLength(20)]
         [Required]
         public IssueStatus Status { get; set; }
         
@@ -71,7 +69,6 @@ namespace OQM10P_HFT_2021221.Models
         
         [Column(TYPE)]
         [EnumDataType(typeof(IssueType))]
-        [MaxLength(20)]
         [Required]
         public IssueType Type { get; set; }
         

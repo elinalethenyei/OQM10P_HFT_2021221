@@ -48,7 +48,7 @@ namespace OQM10P_HFT_2021221.Client
                 Sex = UserSexType.FEMALE,
                 Position = UserPositionType.MEDIOR_DEV
             });
-            Console.WriteLine(userService.GetTopUserByTopProject());
+            userService.GetTopUserByTopProject();
             userService.GetTop3UserByClosedIssues();
             projectService.GetTop3ProjectWithFewBugs();
             userService.GetOwnerOfFirstTopPriorityIssuesBeenSolvedInProject();

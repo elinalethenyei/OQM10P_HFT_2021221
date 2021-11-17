@@ -3,6 +3,7 @@ using OQM10P_HFT_2021221.Models;
 using OQM10P_HFT_2021221.Repository.Interfaces;
 using OQM10P_HFT_2021221.Validation.Exceptions;
 using OQM10P_HFT_2021221.Validation.Validators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,10 +24,12 @@ namespace OQM10P_HFT_2021221.Logic.Services
         {
             try
             {
-                _validator.Validate(_issueRepo);
+                _validator.Validate(entity);
             }
             catch (CustomValidationException e)
             {
+                Console.WriteLine(e.Message);
+                return null;
             }
             return _issueRepo.Create(entity);
         }
@@ -48,7 +51,31 @@ namespace OQM10P_HFT_2021221.Logic.Services
 
         public Issue Update(Issue entity)
         {
-            return _issueRepo.Update(entity);
+            try
+            {
+                _validator.Validate(entity);
+                Issue savedIssue = _issueRepo.Read(entity.Id);
+                savedIssue.ModifiedAt = new System.DateTime();
+                if (!savedIssue.Status.Equals(IssueStatus.DONE) && entity.Status.Equals(IssueStatus.DONE))
+                {
+                    savedIssue.ClosedAt = savedIssue.ModifiedAt;
+                }
+                savedIssue.Status = entity.Status;
+                savedIssue.Priority = entity.Priority;
+                savedIssue.TimeSpent = entity.TimeSpent;
+                savedIssue.Title = entity.Title;
+                savedIssue.Description = entity.Description;
+                savedIssue.DueDate = entity.DueDate;
+                savedIssue.EstimatedTime = entity.EstimatedTime;
+                savedIssue.Type = entity.Type;
+                return _issueRepo.Update(savedIssue);
+
+            }
+            catch (CustomValidationException e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
     }
 }
