@@ -2,6 +2,7 @@
 using OQM10P_HFT_2021221.Models;
 using OQM10P_HFT_2021221.Repository.Interfaces;
 using OQM10P_HFT_2021221.Validation.Exceptions;
+using OQM10P_HFT_2021221.Validation.Interfaces;
 using OQM10P_HFT_2021221.Validation.Validators;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace OQM10P_HFT_2021221.Logic.Services
     {
         private IProjectRepo _projectRepo;
         private IIssueRepo _issueRepo;
-        private ModelValidator _validator;
+        private IModelValidator _validator;
 
-        public ProjectService(IProjectRepo projectRepo, IIssueRepo issueRepo, ModelValidator validator)
+        public ProjectService(IProjectRepo projectRepo, IIssueRepo issueRepo, IModelValidator validator)
         {
             _projectRepo = projectRepo;
             _issueRepo = issueRepo;
@@ -56,7 +57,7 @@ namespace OQM10P_HFT_2021221.Logic.Services
             try
             {
                 _validator.Validate(entity);
-                Project savedProject = _projectRepo.Read(entity.Id);
+                Project savedProject = _projectRepo.Read((int)entity.Id);
                 savedProject.OwnerId = entity.OwnerId;
                 savedProject.Name = entity.Name;
                 savedProject.EstimatedTime = entity.EstimatedTime;

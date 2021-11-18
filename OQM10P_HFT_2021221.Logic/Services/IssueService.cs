@@ -2,6 +2,7 @@
 using OQM10P_HFT_2021221.Models;
 using OQM10P_HFT_2021221.Repository.Interfaces;
 using OQM10P_HFT_2021221.Validation.Exceptions;
+using OQM10P_HFT_2021221.Validation.Interfaces;
 using OQM10P_HFT_2021221.Validation.Validators;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace OQM10P_HFT_2021221.Logic.Services
     public class IssueService : IIssueService
     {
         private IIssueRepo _issueRepo;
-        private ModelValidator _validator;
+        private IModelValidator _validator;
 
-        public IssueService(IIssueRepo issueRepo, ModelValidator validator)
+        public IssueService(IIssueRepo issueRepo, IModelValidator validator)
         {
             _issueRepo = issueRepo;
             _validator = validator;
@@ -54,7 +55,7 @@ namespace OQM10P_HFT_2021221.Logic.Services
             try
             {
                 _validator.Validate(entity);
-                Issue savedIssue = _issueRepo.Read(entity.Id);
+                Issue savedIssue = _issueRepo.Read((int)entity.Id);
                 savedIssue.ModifiedAt = new System.DateTime();
                 if (!savedIssue.Status.Equals(IssueStatus.DONE) && entity.Status.Equals(IssueStatus.DONE))
                 {

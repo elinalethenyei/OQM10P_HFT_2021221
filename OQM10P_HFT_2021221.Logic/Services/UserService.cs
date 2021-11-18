@@ -4,6 +4,7 @@ using OQM10P_HFT_2021221.Models;
 using OQM10P_HFT_2021221.Models.ResponseObjects;
 using OQM10P_HFT_2021221.Repository.Interfaces;
 using OQM10P_HFT_2021221.Validation.Exceptions;
+using OQM10P_HFT_2021221.Validation.Interfaces;
 using OQM10P_HFT_2021221.Validation.Validators;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,9 @@ namespace OQM10P_HFT_2021221.Logic.Services
         private IUserRepo _userRepo;
         private IProjectRepo _projectRepo;
         private IIssueRepo _issueRepo;
-        private ModelValidator _validator;
+        private IModelValidator _validator;
 
-        public UserService(IUserRepo userRepo, IProjectRepo projectRepo, IIssueRepo issueRepo, ModelValidator validator)
+        public UserService(IUserRepo userRepo, IProjectRepo projectRepo, IIssueRepo issueRepo, IModelValidator validator)
         {
             _userRepo = userRepo;
             _projectRepo = projectRepo;
@@ -74,7 +75,7 @@ namespace OQM10P_HFT_2021221.Logic.Services
             try
             {
                 _validator.Validate(entity);
-                User savedUser = _userRepo.Read(entity.Id);
+                User savedUser = _userRepo.Read((int)entity.Id);
                 savedUser.Name = entity.Name;
                 savedUser.Position = entity.Position;
                 savedUser.Sex = entity.Sex;

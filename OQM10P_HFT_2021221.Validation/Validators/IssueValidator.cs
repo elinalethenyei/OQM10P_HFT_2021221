@@ -25,9 +25,9 @@ namespace OQM10P_HFT_2021221.Validation.Validators
             var vc = new ValidationContext(issue);
             Validator.TryValidateObject(issue, vc, errors, validateAllProperties: true);
 
-            if (issue.Id > 0)
+            if (issue.Id != null)
             {
-                Issue savedIssue = _issueRepo.Read(issue.Id);
+                Issue savedIssue = _issueRepo.Read((int)issue.Id);
                 if (savedIssue == null)
                 {
                     errors.Add(new ValidationResult($"Issue with the given id does not exists! Id: {issue.Id}"));
@@ -41,10 +41,10 @@ namespace OQM10P_HFT_2021221.Validation.Validators
             {
                 if (_userRepo.Read((int)issue.UserId) == null)
                 {
-                    errors.Add(new ValidationResult($"Issue\'s user does not exist with the given id! User id: {issue.ProjectId}"));
+                    errors.Add(new ValidationResult($"Issue\'s user does not exist with the given id! User id: {issue.UserId}"));
                 }
             }
-            if (_projectRepo.Read(issue.ProjectId) == null)
+            if (issue.ProjectId != null &&_projectRepo.Read((int)issue.ProjectId) == null)
             {
                 errors.Add(new ValidationResult($"Issue\'s project does not exist with the given id! Project id: {issue.ProjectId}"));
             }

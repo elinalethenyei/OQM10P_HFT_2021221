@@ -18,7 +18,7 @@ namespace OQM10P_HFT_2021221.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column(ID)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Column(NAME)]
         [MaxLength(255)]

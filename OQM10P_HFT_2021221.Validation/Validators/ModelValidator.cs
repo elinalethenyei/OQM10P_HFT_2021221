@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OQM10P_HFT_2021221.Validation.Validators
 {
-    public class ModelValidator
+    public class ModelValidator : IModelValidator
     {
 
         private IUserRepo _userRepo;

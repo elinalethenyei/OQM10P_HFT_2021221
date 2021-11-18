@@ -15,7 +15,7 @@ namespace OQM10P_HFT_2021221.Client
         static IIssueRepo _issueRepo;
         static IUserRepo _userRepo;
         static IProjectRepo _projectRepo;
-        static ModelValidator _validator;
+        static IModelValidator _validator;
         static IValidator<Issue> _issueValidator;
         static IValidator<Project> _projectValidator;
         static IValidator<User> _userValidator;

@@ -41,7 +41,12 @@ namespace OQM10P_HFT_2021221.Test
             //Arrange
             var userRepo = new Mock<IUserRepo>();
             userRepo.Setup(x => x.ReadAll()).Returns(users.AsQueryable());
-            //userRepo.Setup(x => x.Read(It.IsAny<int>())).Returns(users[0]); //???
+            if (users.Count() > 0) {
+                userRepo.Setup(x => x.Read(It.IsAny<int>())).Returns(users[0]);
+            } else
+            {
+                userRepo.Setup(x => x.Read(It.IsAny<int>())).Returns((User)null);
+            }
             var validator = new UserValidator(userRepo.Object);
 
             //Act
@@ -54,7 +59,7 @@ namespace OQM10P_HFT_2021221.Test
 
         }
 
-        #region
+        #region Utils
         static List<TestCaseData> GetInvalidUserTestData()
         {
             User user1 = new User() { Id = id1, Name = "Teszt Elek", Email = "user1@teszt.com", Position = UserPositionType.JUNIOR_DEV, Sex = UserSexType.MALE, Username = "user1" };
@@ -65,10 +70,10 @@ namespace OQM10P_HFT_2021221.Test
 
             testData.Add(new TestCaseData(users, new User() { Name = user2.Name, Email = user1.Email, Position = user2.Position, Sex = user2.Sex, Username = user2.Username }, $"Email address already exists! Email: {user1.Email}"));
             testData.Add(new TestCaseData(users, new User() { Name = user2.Name, Email = user2.Email, Position = user2.Position, Sex = user2.Sex, Username = user1.Username }, $"Username already exists! Username: {user1.Username}"));
-            testData.Add(new TestCaseData(users, new User() { Id = id2, Name = user2.Name, Email = user2.Email, Position = user2.Position, Sex = user2.Sex, Username = user2.Username }, $"User with the given id does not exists! Id: {id2}"));
-            testData.Add(new TestCaseData(users, new User() { Name = user2.Name, Position = user2.Position, Sex = user2.Sex, Username = user2.Username }, $"The Email field is required."));
-            testData.Add(new TestCaseData(users, new User() { Name = user2.Name, Email = user2.Email, Position = user2.Position, Sex = user2.Sex }, $"The Username field is required."));
-            testData.Add(new TestCaseData(users, new User() { Email = user2.Email, Position = user2.Position, Sex = user2.Sex, Username = user2.Username }, $"The Name field is required."));
+            testData.Add(new TestCaseData(new List<User>(), new User() { Id = id2, Name = user2.Name, Email = user2.Email, Position = user2.Position, Sex = user2.Sex, Username = user2.Username }, $"User with the given id does not exists! Id: {id2}"));
+            testData.Add(new TestCaseData(users, new User() { Name = user2.Name, Position = user2.Position, Sex = user2.Sex, Username = user2.Username }, "The Email field is required."));
+            testData.Add(new TestCaseData(users, new User() { Name = user2.Name, Email = user2.Email, Position = user2.Position, Sex = user2.Sex }, "The Username field is required."));
+            testData.Add(new TestCaseData(users, new User() { Email = user2.Email, Position = user2.Position, Sex = user2.Sex, Username = user2.Username }, "The Name field is required."));
             return testData;
         }
         #endregion

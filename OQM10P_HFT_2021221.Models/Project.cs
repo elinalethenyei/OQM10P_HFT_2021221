@@ -37,7 +37,7 @@ namespace OQM10P_HFT_2021221.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column(ID)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Column(NAME)]
         [MaxLength(255)]
@@ -51,10 +51,11 @@ namespace OQM10P_HFT_2021221.Models
         [Column(ESTIMATED_TIME)]
         public int? EstimatedTime { get; set; }
 
+        //A Required nem működött, ha nem nullable az id, mert akkor 0 értéket tesz bele, emiatt átmegy a validáláson
         [Column(OWNER_ID)]
         [Required]
         [ForeignKey(nameof(Owner))] 
-        public int OwnerId { get; set; }
+        public int? OwnerId { get; set; }
 
         [Column(CREATED_AT)]
         [Required] 

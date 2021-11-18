@@ -22,9 +22,9 @@ namespace OQM10P_HFT_2021221.Validation.Validators
             var vc = new ValidationContext(user);
             Validator.TryValidateObject(user, vc, errors, validateAllProperties: true);
 
-            if (user.Id > 0)
+            if (user.Id != null)
             {
-                User savedUser = _userRepo.Read(user.Id);
+                User savedUser = _userRepo.Read((int)user.Id);
                 if (savedUser == null)
                 {
                     errors.Add(new ValidationResult($"User with the given id does not exists! Id: {user.Id}"));
@@ -34,13 +34,13 @@ namespace OQM10P_HFT_2021221.Validation.Validators
             var all = _userRepo.ReadAll();
             var email = _userRepo.ReadAll().Where(x => x.Email.Equals(user.Email));
             var emailandid = _userRepo.ReadAll().Where(x => x.Email.Equals(user.Email) && !x.Id.Equals(user.Id));
-            if (_userRepo.ReadAll().Where(x => x.Email.Equals(user.Email) && !x.Id.Equals(user.Id)).Count() > 0)
+            if (user.Email != null && _userRepo.ReadAll().Where(x => x.Email.Equals(user.Email) && !x.Id.Equals(user.Id)).Count() > 0)
             {
                 errors.Add(new ValidationResult($"Email address already exists! Email: {user.Email}"));
             }
 
-            if (_userRepo.ReadAll().Count(x => x.Username.Equals(user.Username)) > 0)
-            {
+            if (user.Username != null && _userRepo.ReadAll().Count(x => x.Username.Equals(user.Username)) > 0)
+            { 
                 errors.Add(new ValidationResult($"Username already exists! Username: {user.Username}"));
             }
 
