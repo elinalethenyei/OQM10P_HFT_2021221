@@ -27,24 +27,25 @@ namespace OQM10P_HFT_2021221.Validation.Validators
 
             if (issue.Id != null)
             {
+
                 Issue savedIssue = _issueRepo.Read((int)issue.Id);
                 if (savedIssue == null)
                 {
                     errors.Add(new ValidationResult($"Issue with the given id does not exists! Id: {issue.Id}"));
                 }
             }
-            if(issue.UserId == null && !issue.Status.Equals(IssueStatus.TODO))
+            if (issue.UserId == null && !issue.Status.Equals(IssueStatus.TODO))
             {
                 errors.Add(new ValidationResult($"Issue without user has to be in TODO status!"));
             }
-            if(issue.UserId != null)
+            if (issue.UserId != null)
             {
                 if (_userRepo.Read((int)issue.UserId) == null)
                 {
                     errors.Add(new ValidationResult($"Issue\'s user does not exist with the given id! User id: {issue.UserId}"));
                 }
             }
-            if (issue.ProjectId != null &&_projectRepo.Read((int)issue.ProjectId) == null)
+            if (issue.ProjectId != null && _projectRepo.Read((int)issue.ProjectId) == null)
             {
                 errors.Add(new ValidationResult($"Issue\'s project does not exist with the given id! Project id: {issue.ProjectId}"));
             }

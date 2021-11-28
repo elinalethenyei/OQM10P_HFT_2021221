@@ -1,15 +1,13 @@
-﻿using OQM10P_HFT_2021221.Models;
+﻿using OQM10P_HFT_2021221.Logic.Interfaces;
+using OQM10P_HFT_2021221.Models;
 using OQM10P_HFT_2021221.Models.ResponseObjects;
 using OQM10P_HFT_2021221.Repository.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OQM10P_HFT_2021221.Logic.Services
 {
-    public class ReportService
+    public class ReportService : IReportService
     {
 
         private IUserRepo _userRepo;
@@ -101,15 +99,15 @@ namespace OQM10P_HFT_2021221.Logic.Services
                                                     IssueCount = grouped.Count()
                                                 }).Take(1);
 
-                var result = (from project in _projectRepo.ReadAll()
-                              join grouped in topPrioIssuesByProjectInTime on project.Id equals grouped.ProjectId
-                              select new TopPriorityIssueSolverProjectOwnerResponse
-                              {
-                                  ProjectName = project.Name,
-                                  IssueCount = grouped.IssueCount,
-                                  OwnerName = project.Owner.Name
-                              }).FirstOrDefault();
-                return result;
+            var result = (from project in _projectRepo.ReadAll()
+                          join grouped in topPrioIssuesByProjectInTime on project.Id equals grouped.ProjectId
+                          select new TopPriorityIssueSolverProjectOwnerResponse
+                          {
+                              ProjectName = project.Name,
+                              IssueCount = grouped.IssueCount,
+                              OwnerName = project.Owner.Name
+                          }).FirstOrDefault();
+            return result;
         }
 
         /// <summary>

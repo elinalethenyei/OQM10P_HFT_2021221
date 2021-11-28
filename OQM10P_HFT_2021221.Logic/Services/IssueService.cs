@@ -1,10 +1,7 @@
 ﻿using OQM10P_HFT_2021221.Logic.Interfaces;
 using OQM10P_HFT_2021221.Models;
 using OQM10P_HFT_2021221.Repository.Interfaces;
-using OQM10P_HFT_2021221.Validation.Exceptions;
 using OQM10P_HFT_2021221.Validation.Interfaces;
-using OQM10P_HFT_2021221.Validation.Validators;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,17 +18,9 @@ namespace OQM10P_HFT_2021221.Logic.Services
             _validator = validator;
         }
 
-        public Issue Create(Issue entity) 
+        public Issue Create(Issue entity)
         {
-            try
-            {
-                _validator.Validate(entity);
-            }
-            catch (CustomValidationException e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
+            _validator.Validate(entity);
             return _issueRepo.Create(entity);
         }
 
@@ -52,31 +41,22 @@ namespace OQM10P_HFT_2021221.Logic.Services
 
         public Issue Update(Issue entity)
         {
-            try
+            _validator.Validate(entity);
+            Issue savedIssue = _issueRepo.Read((int)entity.Id);
+            savedIssue.ModifiedAt = new System.DateTime();
+            if (!savedIssue.Status.Equals(IssueStatus.DONE) && entity.Status.Equals(IssueStatus.DONE))
             {
-                _validator.Validate(entity);
-                Issue savedIssue = _issueRepo.Read((int)entity.Id);
-                savedIssue.ModifiedAt = new System.DateTime();
-                if (!savedIssue.Status.Equals(IssueStatus.DONE) && entity.Status.Equals(IssueStatus.DONE))
-                {
-                    savedIssue.ClosedAt = savedIssue.ModifiedAt;
-                }
-                savedIssue.Status = entity.Status;
-                savedIssue.Priority = entity.Priority;
-                savedIssue.TimeSpent = entity.TimeSpent;
-                savedIssue.Title = entity.Title;
-                savedIssue.Description = entity.Description;
-                savedIssue.DueDate = entity.DueDate;
-                savedIssue.EstimatedTime = entity.EstimatedTime;
-                savedIssue.Type = entity.Type;
-                return _issueRepo.Update(savedIssue);
-
+                savedIssue.ClosedAt = savedIssue.ModifiedAt;
             }
-            catch (CustomValidationException e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
+            savedIssue.Status = entity.Status;
+            savedIssue.Priority = entity.Priority;
+            savedIssue.TimeSpent = entity.TimeSpent;
+            savedIssue.Title = entity.Title;
+            savedIssue.Description = entity.Description;
+            savedIssue.DueDate = entity.DueDate;
+            savedIssue.EstimatedTime = entity.EstimatedTime;
+            savedIssue.Type = entity.Type;
+            return _issueRepo.Update(savedIssue);
         }
     }
 }

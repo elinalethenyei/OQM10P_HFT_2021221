@@ -33,6 +33,17 @@ namespace OQM10P_HFT_2021221.Models
             TimeSpent = 0;
         }
 
+        public Issue(string title)
+        {
+            Title = title;
+            CreatedAt = new DateTime();
+            ModifiedAt = CreatedAt;
+            Status = IssueStatus.TODO;
+            Type = IssueType.TASK;
+            Priority = IssuePriorityType.MEDIUM;
+            TimeSpent = 0;
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column(ID)]
@@ -74,11 +85,11 @@ namespace OQM10P_HFT_2021221.Models
         
         [Column(CREATED_AT)]
         [Required]
-        public DateTime CreatedAt { get; private set; }
+        public DateTime? CreatedAt { get; private set; }
         
         [Column(MODIFIED_AT)]
         [Required]
-        public DateTime ModifiedAt { get; set; }
+        public DateTime? ModifiedAt { get; set; }
         
         [Column(CLOSED_AT)]
         public DateTime? ClosedAt { get; set; }
