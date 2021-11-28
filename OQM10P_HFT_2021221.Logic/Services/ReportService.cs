@@ -84,7 +84,7 @@ namespace OQM10P_HFT_2021221.Logic.Services
         }
 
         /// <summary>
-        /// Visszaadja, hogy ki a tulajdonosa tulajdonosa annak a projektnek, ahol a legtöbb magas prioritású feladat a tervezett időn belül lett megoldva
+        /// Visszaadja, hogy ki a tulajdonosa annak a projektnek, ahol a legtöbb magas prioritású feladat a tervezett időn belül lett lezárva
         /// </summary>
         /// <returns></returns>
         public TopPriorityIssueSolverProjectOwnerResponse GetOwnerOfFirstTopPriorityIssuesBeenSolvedInProject()
