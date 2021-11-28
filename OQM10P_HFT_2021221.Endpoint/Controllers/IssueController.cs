@@ -8,7 +8,7 @@ namespace OQM10P_HFT_2021221.Endpoint.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class IssueController : CrudControllerBase<Issue, int>
+    public class IssueController : BaseCrudController<Issue, int>
     {
         public IssueController(IIssueService issueService) : base(issueService)
         {

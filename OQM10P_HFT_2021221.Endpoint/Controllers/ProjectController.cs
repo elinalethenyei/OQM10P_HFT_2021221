@@ -6,7 +6,7 @@ namespace OQM10P_HFT_2021221.Endpoint.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ProjectController : CrudControllerBase<Project, int>
+    public class ProjectController : BaseCrudController<Project, int>
     {
         public ProjectController(IProjectService projectService) : base(projectService)
         {

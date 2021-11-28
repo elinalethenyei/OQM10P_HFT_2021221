@@ -6,7 +6,7 @@ namespace OQM10P_HFT_2021221.Endpoint.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class UserController : CrudControllerBase<User, int>
+    public class UserController : BaseCrudController<User, int>
     {
         public UserController(IUserService userService) : base(userService)
         {

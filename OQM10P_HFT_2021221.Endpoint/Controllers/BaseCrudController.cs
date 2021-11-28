@@ -11,12 +11,12 @@ namespace OQM10P_HFT_2021221.Endpoint.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class CrudControllerBase<TEntity, TKey> : ControllerBase
+    public class BaseCrudController<TEntity, TKey> : ControllerBase
     {
 
         readonly IBaseService<TEntity, TKey> service;
 
-        public CrudControllerBase(IBaseService<TEntity, TKey> service)
+        public BaseCrudController(IBaseService<TEntity, TKey> service)
         {
             this.service = service;
         }
