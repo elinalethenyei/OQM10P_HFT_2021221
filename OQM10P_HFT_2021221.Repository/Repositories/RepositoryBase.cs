@@ -23,6 +23,7 @@ namespace OQM10P_HFT_2021221.Repository.Repositories
         public void Delete(TKey key)
         {
             Context.Remove(Read(key));
+            Context.SaveChanges();
         }
 
         //public TEntity Read(TKey key) {

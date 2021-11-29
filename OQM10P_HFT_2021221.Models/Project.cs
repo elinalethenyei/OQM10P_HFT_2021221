@@ -53,7 +53,6 @@ namespace OQM10P_HFT_2021221.Models
         //A Required nem működött, ha nem nullable az id, mert akkor 0 értéket tesz bele, emiatt átmegy a validáláson
         [Column(OWNER_ID)]
         [Required]
-        [ForeignKey(nameof(Owner))]
         public int? OwnerId { get; set; }
 
         [Column(CREATED_AT)]
@@ -66,6 +65,7 @@ namespace OQM10P_HFT_2021221.Models
         [Column(CLOSED_AT)]
         public DateTime? ClosedAt { get; set; }
 
+        [NotMapped]
         public virtual User Owner { get; set; }
 
         [NotMapped]
@@ -74,7 +74,7 @@ namespace OQM10P_HFT_2021221.Models
 
         public override string ToString()
         {
-            return $"Id: {Id}, Name: {Name}, EstimatedTime: {EstimatedTime}, IsOpened: {ClosedAt == null}, Owner: {Owner.Name}";
+            return $"Id: {Id}, Name: {Name}, EstimatedTime: {EstimatedTime}, IsOpened: {ClosedAt == null}, Owner: {Owner?.Name}, GoalDescription: {GoalDescription ?? string.Empty}";
         }
     }
 }

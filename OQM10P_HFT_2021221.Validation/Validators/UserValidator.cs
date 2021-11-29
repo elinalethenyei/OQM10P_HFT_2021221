@@ -31,15 +31,12 @@ namespace OQM10P_HFT_2021221.Validation.Validators
                 }
             }
 
-            var all = _userRepo.ReadAll();
-            var email = _userRepo.ReadAll().Where(x => x.Email.Equals(user.Email));
-            var emailandid = _userRepo.ReadAll().Where(x => x.Email.Equals(user.Email) && !x.Id.Equals(user.Id));
             if (user.Email != null && _userRepo.ReadAll().Where(x => x.Email.Equals(user.Email) && !x.Id.Equals(user.Id)).Count() > 0)
             {
                 errors.Add(new ValidationResult($"Email address already exists! Email: {user.Email}"));
             }
 
-            if (user.Username != null && _userRepo.ReadAll().Count(x => x.Username.Equals(user.Username)) > 0)
+            if (user.Username != null && _userRepo.ReadAll().Where(x => x.Username.Equals(user.Username) && !x.Id.Equals(user.Id)).Count() > 0)
             { 
                 errors.Add(new ValidationResult($"Username already exists! Username: {user.Username}"));
             }

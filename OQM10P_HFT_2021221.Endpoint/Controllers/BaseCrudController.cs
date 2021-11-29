@@ -2,6 +2,7 @@
 using OQM10P_HFT_2021221.Logic.Interfaces;
 using OQM10P_HFT_2021221.Models.ResponseObjects;
 using OQM10P_HFT_2021221.Validation.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -64,9 +65,10 @@ namespace OQM10P_HFT_2021221.Endpoint.Controllers
             {
                 service.Update(TEntity);
             }
-            catch (CustomValidationException)
+            catch (CustomValidationException e)
             {
                 result.isSuccess = false;
+                result.errorMessages = e.Errors.Select(x => x.ErrorMessage).ToList();
             }
             return result;
         }
@@ -80,9 +82,10 @@ namespace OQM10P_HFT_2021221.Endpoint.Controllers
             {
                 service.Delete(id);
             }
-            catch (CustomValidationException)
+            catch (Exception e)
             {
                 result.isSuccess = false;
+                result.errorMessages = new List<string>() { e.Message };
             }
             return result;
         }

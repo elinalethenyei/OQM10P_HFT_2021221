@@ -9,8 +9,4 @@
     <ProjectReference Include="..\OQM10P_HFT_2021221.Models\OQM10P_HFT_2021221.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
-
 </Project>

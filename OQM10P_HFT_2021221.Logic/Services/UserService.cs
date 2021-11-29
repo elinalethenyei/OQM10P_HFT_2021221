@@ -2,7 +2,6 @@
 using OQM10P_HFT_2021221.Logic.Interfaces;
 using OQM10P_HFT_2021221.Models;
 using OQM10P_HFT_2021221.Repository.Interfaces;
-using OQM10P_HFT_2021221.Validation.Exceptions;
 using OQM10P_HFT_2021221.Validation.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -29,17 +28,8 @@ namespace OQM10P_HFT_2021221.Logic.Services
 
         public User Create(User entity)
         {
-            try
-            {
-                _validator.Validate(entity);
-                return _userRepo.Create(entity);
-            }
-            catch (CustomValidationException e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-
+            _validator.Validate(entity);
+            return _userRepo.Create(entity);
         }
 
         public void Delete(int id)
@@ -78,21 +68,13 @@ namespace OQM10P_HFT_2021221.Logic.Services
 
         public User Update(User entity)
         {
-            try
-            {
-                _validator.Validate(entity);
-                User savedUser = _userRepo.Read((int)entity.Id);
-                savedUser.Name = entity.Name;
-                savedUser.Position = entity.Position;
-                savedUser.Sex = entity.Sex;
-                savedUser.Email = entity.Email;
-                return _userRepo.Update(savedUser);
-            }
-            catch (CustomValidationException e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
+            _validator.Validate(entity);
+            User savedUser = _userRepo.Read((int)entity.Id);
+            savedUser.Name = entity.Name;
+            savedUser.Position = entity.Position;
+            savedUser.Sex = entity.Sex;
+            savedUser.Email = entity.Email;
+            return _userRepo.Update(savedUser);
         }
     }
 }

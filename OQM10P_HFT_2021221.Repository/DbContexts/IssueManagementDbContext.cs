@@ -31,8 +31,9 @@ namespace OQM10P_HFT_2021221.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Issue>(e => e.HasOne(p => p.Project).WithMany(i => i.Issues).HasForeignKey(p => p.ProjectId).OnDelete(DeleteBehavior.ClientSetNull));
+            modelBuilder.Entity<Issue>(e => e.HasOne(i => i.Project).WithMany(p => p.Issues).HasForeignKey(i => i.ProjectId).OnDelete(DeleteBehavior.ClientSetNull));
             modelBuilder.Entity<Issue>(e => e.HasOne(i => i.User).WithMany().HasForeignKey(i=>i.UserId).OnDelete(DeleteBehavior.SetNull));
+            modelBuilder.Entity<Project>(e => e.HasOne(p => p.Owner).WithMany().HasForeignKey(p => p.OwnerId).OnDelete(DeleteBehavior.NoAction));
 
 
             //seed

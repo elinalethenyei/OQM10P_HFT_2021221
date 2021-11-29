@@ -107,9 +107,9 @@ namespace OQM10P_HFT_2021221.Models
         [NotMapped]
         public virtual User? User { get; set; }
 
-        //public override string ToString()
-        //{
-        //    return $"Id: {Id}, Title: {Title}, Project: {Project.Name}, Type: {Type}, Status: {Status}, TimeSpent: {TimeSpent}, User: {User?.Name}";
-        //}
+        public override string ToString()
+        {
+            return $"Id: {Id}, Title: {Title}, Project: {Project.Name}, Type: {Type}, Status: {Status}, TimeSpent: {TimeSpent}, User: {User?.Name}";
+        }
     }
 }

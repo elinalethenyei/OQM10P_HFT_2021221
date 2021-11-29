@@ -56,6 +56,8 @@ namespace OQM10P_HFT_2021221.Logic.Services
             savedIssue.DueDate = entity.DueDate;
             savedIssue.EstimatedTime = entity.EstimatedTime;
             savedIssue.Type = entity.Type;
+            savedIssue.UserId = entity.UserId;
+            savedIssue.ProjectId = entity.ProjectId;
             return _issueRepo.Update(savedIssue);
         }
     }

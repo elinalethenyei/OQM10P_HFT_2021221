@@ -23,6 +23,7 @@ namespace OQM10P_HFT_2021221.Endpoint.Controllers
         [HttpGet]
         [ActionName("GetTopUserByTopProject")]
         [OpenApiOperation("Visszaadja, hogy a tervezett ráfordítás alapján a legnagyobb projekten melyik user dolgozott a legtöbbet", "")]
+        [SwaggerResponse(typeof(TopTimeSpentUserByBiggestProjectResponse))]
         public TopTimeSpentUserByBiggestProjectResponse GetTopUserByTopProject()
         {
             return reportService.GetTopUserByTopProject();
@@ -32,6 +33,7 @@ namespace OQM10P_HFT_2021221.Endpoint.Controllers
         [HttpGet]
         [ActionName("GetTop3UserByClosedIssues")]
         [OpenApiOperation("Visszaadja azt a top 3 felhasználót, akik a legtöbb feladatot zárták le", "")]
+        [SwaggerResponse(typeof(Dictionary<string, int>))]
         public Dictionary<string, int> GetTop3UserByClosedIssues()
         {
             return reportService.GetTop3UserByClosedIssues();
