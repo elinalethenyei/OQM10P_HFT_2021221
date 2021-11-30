@@ -9,10 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OQM10P_HFT_2021221.Data\OQM10P_HFT_2021221.Data.csproj" />
     <ProjectReference Include="..\OQM10P_HFT_2021221.Logic\OQM10P_HFT_2021221.Logic.csproj" />
     <ProjectReference Include="..\OQM10P_HFT_2021221.Models\OQM10P_HFT_2021221.Models.csproj" />
-    <ProjectReference Include="..\OQM10P_HFT_2021221.Repository\OQM10P_HFT_2021221.Repository.csproj" />
   </ItemGroup>
 
 </Project>

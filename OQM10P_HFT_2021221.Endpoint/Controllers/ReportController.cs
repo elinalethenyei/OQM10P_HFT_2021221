@@ -51,7 +51,7 @@ namespace OQM10P_HFT_2021221.Endpoint.Controllers
         // GET: api/Reports/GetDoneIssueCountByUserSexInDueDate
         [HttpGet]
         [ActionName("GetDoneIssueCountByUserSexInDueDate")]
-        [OpenApiOperation("Visszaadja, nemek szerint a határidőn belül lezárt taskok számát", "")]
+        [OpenApiOperation("Visszaadja nemek szerint a határidőn belül lezárt taskok számát", "")]
         public Dictionary<UserSexType, int> GetDoneIssueCountByUserSexInDueDate()
         {
             return reportService.GetDoneIssueCountByUserSexInDueDate();
