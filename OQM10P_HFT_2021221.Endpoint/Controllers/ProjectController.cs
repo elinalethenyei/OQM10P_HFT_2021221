@@ -18,7 +18,7 @@ namespace OQM10P_HFT_2021221.Endpoint.Controllers
         }
 
         // Close project api/TEntity/Close/5
-        [HttpDelete("{id}")]
+        [HttpPut("{id}")]
         [ActionName("Close")]
         public ApiResult Close(int id)
         {

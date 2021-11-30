@@ -14,6 +14,14 @@ namespace OQM10P_HFT_2021221.Client.Helper
             }
         }
 
+        public static void ToConsole<TKey, TValue>(this IDictionary<TKey, TValue> collection, string keyName, string valueName)
+        {
+            foreach (var item in collection)
+            {
+                Console.WriteLine($"{keyName}: {item.Key}, {valueName}: {item.Value}");
+            }
+        }
+
         public static void ToConsole(this ApiResult apiResult, string action)
         {
             if (apiResult.isSuccess)

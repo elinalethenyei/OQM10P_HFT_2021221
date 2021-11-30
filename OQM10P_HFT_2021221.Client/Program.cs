@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace OQM10P_HFT_2021221.Client
@@ -15,22 +14,53 @@ namespace OQM10P_HFT_2021221.Client
         static void Main(string[] args)
         {
             Console.WriteLine("Waiting for server...");
+            Console.WriteLine("Hit enter when server is loaded!");
             Console.ReadLine();
+
 
             var serializerOption = new JsonSerializerOptions(JsonSerializerDefaults.Web);
 
-            using (var client = new HttpClient())
-            {
-                var httpService = new HttpService<Issue, int>("Issue", "http://localhost:51332/api/");
-                
-                CallIssueEndpoints();
-                CallUserEndpoints();
-                CallProjectEndpoints();
+            Console.WriteLine("\nHit enter to see api call results related to users!");
+            Console.ReadLine();
+            Console.WriteLine("\n\n**********  USERS  **********\n");
+            CallUserEndpoints();
 
-                Console.ReadLine();
+            Console.WriteLine("\nHit enter to see api call results related to projects!");
+            Console.ReadLine();
+            Console.WriteLine("\n\n**********  PROJECTS  **********\n");
+            CallProjectEndpoints();
+
+            Console.WriteLine("\nHit enter to see api call results related to issues!");
+            Console.ReadLine();
+            Console.WriteLine("\n\n**********  ISSUES  **********\n");
+            CallIssueEndpoints();
+
+            Console.WriteLine("\nHit enter to see reports!");
+            Console.ReadLine();
+            Console.WriteLine("\n\n**********  REPORTS  **********\n");
+            
+            var result1 = CallReportEndpoints<TopTimeSpentUserByBiggestProjectResponse>("GetTopUserByTopProject", "Tervezett ráfordítás alapján a legnagyobb projekten melyik user dolgozott a legtöbbet");
+            Console.WriteLine($"Biggest project by estimated time: {result1.ProjectName}, \nUser who worked on it the most: {result1.UserName}, \nSum time spent on the project by the user: {result1.TimeSpentSum}");
+
+            var result2 = CallReportEndpoints<Dictionary<string, int>>("GetTop3UserByClosedIssues", "Visszaadja azt a top 3 usert, akik a legtöbb issuet zárták le");
+            result2.ToConsole("User name", "Sum closed issues");
+
+            var result3 = CallReportEndpoints<TopPriorityIssueSolverProjectOwnerResponse>("GetOwnerOfFirstTopPriorityIssuesBeenSolvedInProject", "Visszaadja, hogy ki a tulajdonosa annak a projektnek, ahol a legtöbb magas prioritású feladat a tervezett időn belül lett lezárva");
+            Console.WriteLine($"Project name: {result3.ProjectName}, \nNumber of closed high priority issues: {result3.IssueCount}, \nOwner of the project: {result3.OwnerName}");
+
+            var result4 = CallReportEndpoints<Dictionary<UserSexType, int>>("GetDoneIssueCountByUserSexInDueDate", "Visszaadja, hogy nők és férfiak mennyi taskkal végeztek határidőn belül");
+            result4.ToConsole("Sex", "Sum closed issues before due date");
+
+            var result5 = CallReportEndpoints<Dictionary<string, double>>("GetSpentPerEstimatedTimeRatePerProject", "Riport ami tartalmazza a projekt nevét és projekt lezárt feladataival eltöltött és becsült idő arányát projektenként");
+            result5.ToConsole("Project name", "Time spent/estimated");
+
+            var result6 = CallReportEndpoints<Dictionary<string, int>>("GetTop3ProjectWithFewBugs", "Visszaadja azt a top 3 projektet, ahol a legkevesebb BUG típusú issue található");
+            result6.ToConsole("Project name", "Number of BUG issues");
+
+            Console.WriteLine("\n\n***** The End *****");
+            Console.ReadLine();
 
 
-            }
 
         }
 
@@ -183,6 +213,20 @@ namespace OQM10P_HFT_2021221.Client
             projects.ToConsole();
 
             return projects;
+        }
+
+        static TResponseType CallReportEndpoints<TResponseType>(string actionName, string reportTitle)
+        {
+            Console.WriteLine($"\n\n***** {reportTitle} *****");
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:51332/api/report/");
+                var serializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+
+                var response = client.GetAsync(actionName).GetAwaiter().GetResult();
+                return JsonSerializer.Deserialize<TResponseType>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult(), serializerOptions);
+            }
+
         }
     }
 }
